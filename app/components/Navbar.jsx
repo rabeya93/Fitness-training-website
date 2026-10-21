@@ -11,9 +11,8 @@ const Navbar = ({ planCount = 0, savedCount = 0 }) => {
   return (
     // Full-width bar
     <header className="border-b border-white/5 bg-[#0b0b0d]">
-      {/* Same container as <main> so the edges line up */}
       <div className="navbar mx-auto min-h-22 max-w-10xl px-4 sm:px-6 lg:px-8">
-        {/* LEFT: hamburger (mobile only) + logo */}
+        {/* hamburger (mobile) + logo */}
         <div className="navbar-start">
           <div className="dropdown md:hidden">
             <div
@@ -59,7 +58,7 @@ const Navbar = ({ planCount = 0, savedCount = 0 }) => {
           </a>
         </div>
 
-        {/* CENTER: tabs (tablet and up) */}
+        {/* tabs (tablet and up) */}
         <div className="navbar-center hidden md:flex">
           <ul className="flex items-center gap-1">
             {links.map((link) => (
@@ -79,7 +78,7 @@ const Navbar = ({ planCount = 0, savedCount = 0 }) => {
           </ul>
         </div>
 
-        {/* RIGHT: Plan + Saved counters */}
+        {/*  Plan + Saved counters */}
         <div className="navbar-end gap-4 text-sm">
           <span className="flex items-center gap-2 text-gray-300">
             Plan
