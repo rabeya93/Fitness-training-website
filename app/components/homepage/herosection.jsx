@@ -4,7 +4,7 @@ import Heroimage from "@/app/assets/banner.png";
 const HeroSection = () => {
   return (
     <section className="mx-auto w-full bg-[#0b0c0e] px-5 py-10 sm:px-8 sm:py-12 lg:px-[22px] lg:py-[42px]">
-      <div className="relative mx-auto grid min-h-100 w-full items-center gap-8 bg-[#15161b] px-6 py-10 sm:px-10 md:grid-cols-[1.35fr_0.65fr] md:px-12 lg:min-h-[408px] lg:px-[51px] lg:py-12">
+      <div className="relative mx-auto grid min-h-100 w-full items-center gap-8 rounded-2xl bg-[#15161b] px-6 py-10 sm:px-10 md:grid-cols-[1.35fr_0.65fr] md:px-12 lg:min-h-[408px] lg:px-[51px] lg:py-12">
         {/* LEFT: Content */}
         <div className="relative z-10">
           <p className="text-[11px] font-bold tracking-[0.16em] text-[#ccff00]">
