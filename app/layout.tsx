@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from './components/Navbar'
 import { Oswald } from "next/font/google";
+import { PlanProvider } from "./context/PlanContext";
 
 const oswald = Oswald({
   subsets: ["latin"],
@@ -32,11 +33,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased ${oswald.variable} scroll-smooth`}
     >
       <body className="min-h-full flex flex-col">
-         
-        <Navbar />
-        <main>
-          {children}
-        </main>
+        <PlanProvider>
+          <Navbar />
+          <main>
+            {children}
+          </main>
+        </PlanProvider>
       </body>
     </html>
   );
