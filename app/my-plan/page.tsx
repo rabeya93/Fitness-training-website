@@ -30,6 +30,7 @@ export default function MyPlanPage() {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
   const [tab, setTab] = useState<Tab>("plan");
   const [sortBy, setSortBy] = useState<SortOption>("duration");
+  const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -92,6 +93,17 @@ export default function MyPlanPage() {
       return b.rating - a.rating;
     });
   }, [workouts, currentIds, sortBy]);
+
+  const filteredWorkouts = currentWorkouts.filter((workout) => {
+    const query = search.trim().toLowerCase();
+
+    return (
+      workout.name.toLowerCase().includes(query) ||
+      workout.muscleGroups.some((muscle) =>
+        muscle.toLowerCase().includes(query),
+      )
+    );
+  });
 
   const totalMinutes = currentWorkouts.reduce(
     (total, workout) => total + workout.duration,
@@ -209,6 +221,16 @@ export default function MyPlanPage() {
             </div>
           </label>
         </div>
+        <div className="mt-4">
+          <input
+            type="text"
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+            placeholder="Search by workout name or muscle group..."
+            aria-label="Search workouts"
+            className="w-full rounded-xl border border-white/10 bg-[#13161c] px-4 py-3 text-sm text-white outline-none placeholder:text-gray-500 focus:border-[#ccff00] sm:max-w-md"
+          />
+        </div>
 
         {/* Workout list / empty state */}
         <section className="mt-4 space-y-3">
@@ -223,16 +245,18 @@ export default function MyPlanPage() {
             >
               {error}
             </div>
-          ) : currentWorkouts.length === 0 ? (
-            <div className="flex min-h-[260px] flex-col items-center justify-center rounded-xl border border-dashed border-white/10 bg-[#0d0e11] px-4 py-12 text-center">
+          ) : filteredWorkouts.length === 0 ? (
+            <div className="flex min-h-65 flex-col items-center justify-center rounded-xl border border-dashed border-white/10 bg-[#0d0e11] px-4 py-12 text-center">
               <h2 className="font-heading text-lg font-bold">
                 NOTHING HERE YET
               </h2>
 
               <p className="mt-2 max-w-sm text-xs text-gray-500">
-                {tab === "plan"
-                  ? "Browse the library and add a lift to get today moving."
-                  : "Save workouts you like and come back to them later."}
+                {search.trim()
+                  ? `No workouts found for "${search}".`
+                  : tab === "plan"
+                    ? "Browse the library and add a lift to get today moving."
+                    : "Save workouts you like and come back to them later."}
               </p>
 
               <Link
@@ -243,7 +267,7 @@ export default function MyPlanPage() {
               </Link>
             </div>
           ) : (
-            currentWorkouts.map((workout) => (
+            filteredWorkouts.map((workout) => (
               <article
                 key={workout.id}
                 className="flex flex-col gap-4 rounded-xl border border-white/5 bg-[#13161c] p-3 sm:flex-row sm:items-center"

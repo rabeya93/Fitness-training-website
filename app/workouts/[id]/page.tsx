@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import WorkoutDetails from "@/app/components/WorkoutDetails";
 
@@ -17,11 +18,25 @@ type Workout = {
   instructions: string[];
 };
 
-export default async function WorkoutDetailPage({
-  params,
-}: {
+type PageProps = {
   params: Promise<{ id: string }>;
-}) {
+};
+
+export default function WorkoutDetailPage({ params }: PageProps) {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-[#0b0c0e] px-6 py-16 text-center text-gray-400">
+          Loading workout details...
+        </div>
+      }
+    >
+      <WorkoutDetailContent params={params} />
+    </Suspense>
+  );
+}
+
+async function WorkoutDetailContent({ params }: PageProps) {
   const { id } = await params;
 
   const res = await fetch("https://api.api-store.workers.dev/api/fitlog", {

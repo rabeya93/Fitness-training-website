@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from './components/Navbar'
+import Navbar from "./components/Navbar";
 import { Oswald } from "next/font/google";
 import { PlanProvider } from "./context/PlanContext";
-import Footer from "./components/Footer"
+import Footer from "./components/Footer";
+import { Suspense } from "react";
 
 const oswald = Oswald({
   subsets: ["latin"],
@@ -35,11 +36,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="flex min-h-screen flex-col bg-[#0b0c0e]">
         <PlanProvider>
-          <Navbar />
-          <main className="flex-1">
-            {children}
-          </main>
-          <Footer/>
+          <Suspense fallback={<div className="h-16 bg-[#0b0c0e]" />}>
+            <Navbar />
+          </Suspense>
+          <main className="flex-1">{children}</main>
+          <Footer />
         </PlanProvider>
       </body>
     </html>
