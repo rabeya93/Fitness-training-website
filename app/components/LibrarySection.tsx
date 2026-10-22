@@ -25,6 +25,7 @@ const LibrarySection = async () => {
   const data = await res.json();
 
   // Supports either an array or an object containing a data array.
+
   const workouts: Workout[] = Array.isArray(data) ? data : (data.data ?? []);
 
   return (
@@ -45,6 +46,7 @@ const LibrarySection = async () => {
         </div>
 
         {/* Responsive workout grid */}
+
         <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {workouts.map((workout) => (
             <WorkoutCard key={workout.id} workout={workout} />
@@ -52,6 +54,7 @@ const LibrarySection = async () => {
         </div>
 
         {/* Empty state */}
+        
         {workouts.length === 0 && (
           <p className="py-10 text-center text-sm text-gray-400">
             No workouts available.

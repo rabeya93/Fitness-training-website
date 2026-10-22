@@ -126,7 +126,7 @@ export default function MyPlanPage() {
   }
 
   return (
-    <main className="min-h-screen flex-1 bg-[#0b0c0e] px-4 py-6 text-white sm:px-6 lg:px-8">
+    <main className="flex-1 bg-[#0b0c0e] px-4 py-7 text-white sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         {/* Page heading */}
         <div>
@@ -188,7 +188,7 @@ export default function MyPlanPage() {
             </button>
           </div>
 
-          <label className="flex items-center gap-2 text-[10px] text-gray-500">
+          <label className="flex items-center gap-2 text-[12px] text-gray-500">
             Sort By
             <div className="relative">
               <select

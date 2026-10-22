@@ -90,13 +90,11 @@ export const PlanProvider = ({ children }: { children: ReactNode }) => {
       return false;
     }
 
-    setPlanIds((current) => {
-      if (current.includes(id) || current.length >= 5) {
-        return current;
-      }
+    setPlanIds((current) =>
+      current.includes(id) || current.length >= 5 ? current : [...current, id],
+    );
 
-      return [...current, id];
-    });
+    setSavedIds((current) => current.filter((item) => item !== id));
 
     return true;
   };
@@ -113,6 +111,8 @@ export const PlanProvider = ({ children }: { children: ReactNode }) => {
     setSavedIds((current) =>
       current.includes(id) ? current : [...current, id],
     );
+
+    setPlanIds((current) => current.filter((item) => item !== id));
 
     return true;
   };

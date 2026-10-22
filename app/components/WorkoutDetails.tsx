@@ -39,25 +39,31 @@ export default function WorkoutDetails({ workout }: { workout: Workout }) {
   function togglePlan() {
     if (inPlan) {
       removeFromPlan(workout.id);
-      setToast("Removed from today's plan");
+      setToast("");
       return;
     }
 
     const added = addToPlan(workout.id);
+
     setToast(
-      added ? "Added to today's plan" : "Today's plan is limited to five lifts",
+      added
+        ? "Added to today's plan"
+        : planIds.length >= 5
+          ? "Today's plan is limited to five lifts"
+          : "Already in today's plan",
     );
   }
 
   function toggleSaved() {
     if (isSaved) {
       removeSaved(workout.id);
-      setToast("Removed from saved workouts");
+      setToast("");
       return;
     }
 
-    saveWorkout(workout.id);
-    setToast("Saved for later");
+    const saved = saveWorkout(workout.id);
+
+    setToast(saved ? "Saved for later" : "Already saved for later");
   }
 
   const specs = [

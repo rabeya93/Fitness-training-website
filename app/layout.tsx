@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from './components/Navbar'
 import { Oswald } from "next/font/google";
 import { PlanProvider } from "./context/PlanContext";
+import Footer from "./components/Footer"
 
 const oswald = Oswald({
   subsets: ["latin"],
@@ -32,12 +33,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased ${oswald.variable} scroll-smooth`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="flex min-h-screen flex-col bg-[#0b0c0e]">
         <PlanProvider>
           <Navbar />
-          <main>
+          <main className="flex-1">
             {children}
           </main>
+          <Footer/>
         </PlanProvider>
       </body>
     </html>
