@@ -2,19 +2,7 @@
 
 import { useState } from "react";
 import WorkoutCard from "./WorkoutCard";
-
-type Workout = {
-  id: string | number;
-  name: string;
-  image?: string;
-  categories?: string[];
-  muscleGroups: string[];
-  equipment?: string[] | string;
-  duration?: number | string;
-  calories?: number;
-  caloriesBurned: number;
-  rating?: number;
-};
+import type { Workout } from "../types/workout";
 
 export default function WorkoutLibraryClient({
   workouts,
@@ -39,7 +27,6 @@ export default function WorkoutLibraryClient({
 
   return (
     <>
-      {/* Search */}
       <div className="mt-6">
         <input
           type="text"
@@ -51,7 +38,6 @@ export default function WorkoutLibraryClient({
         />
       </div>
 
-      {/* Workout grid */}
       {filteredWorkouts.length > 0 ? (
         <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {filteredWorkouts.map((workout) => (

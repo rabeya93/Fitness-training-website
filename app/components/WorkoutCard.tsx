@@ -1,17 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-
-type Workout = {
-  id: number;
-  name: string;
-  image: string;
-  muscleGroups: string[];
-  equipment: string;
-  duration: number;
-  caloriesBurned: number;
-  rating: number;
-};
-
+import type { Workout } from "../types/workout";
 
 const WorkoutCard = ({ workout }: { workout: Workout }) => {
   const equipment = Array.isArray(workout.equipment)
