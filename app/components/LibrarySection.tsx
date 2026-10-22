@@ -1,4 +1,4 @@
-import WorkoutCard from "./WorkoutCard";
+import WorkoutLibraryClient from "./WorkoutLibraryClient";
 
 type Workout = {
   id: string | number;
@@ -24,8 +24,6 @@ const LibrarySection = async () => {
 
   const data = await res.json();
 
-  // Supports either an array or an object containing a data array.
-
   const workouts: Workout[] = Array.isArray(data) ? data : (data.data ?? []);
 
   return (
@@ -34,7 +32,6 @@ const LibrarySection = async () => {
       className="scroll-mt-6 border-b border-white/10 bg-[#0b0c0e] px-5 py-12 sm:px-8 lg:px-10"
     >
       <div className="mx-auto max-w-10xl">
-        {/* Section heading */}
         <div>
           <h2 className="font-heading text-2xl font-extrabold uppercase text-white">
             The Library
@@ -45,21 +42,7 @@ const LibrarySection = async () => {
           </p>
         </div>
 
-        {/* Responsive workout grid */}
-
-        <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-          {workouts.map((workout) => (
-            <WorkoutCard key={workout.id} workout={workout} />
-          ))}
-        </div>
-
-        {/* Empty state */}
-        
-        {workouts.length === 0 && (
-          <p className="py-10 text-center text-sm text-gray-400">
-            No workouts available.
-          </p>
-        )}
+        <WorkoutLibraryClient workouts={workouts} />
       </div>
     </section>
   );

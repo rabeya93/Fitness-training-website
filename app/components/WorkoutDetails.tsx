@@ -78,9 +78,9 @@ export default function WorkoutDetails({ workout }: { workout: Workout }) {
 
   return (
     <main className="min-h-screen bg-[#0b0c0e] px-4 py-5 text-white sm:px-6">
-      <div className="mx-auto grid max-w-[1150px] items-start gap-5 rounded-xl border border-white/5 bg-[#0f1014] p-3 sm:p-5 lg:min-h-[80vh] lg:grid-cols-2 lg:gap-7 lg:p-5">
+      <div className="mx-auto grid max-w-287.5 items-start gap-5 rounded-xl border border-white/5 bg-[#0f1014] p-3 sm:p-5 lg:min-h-[80vh] lg:grid-cols-2 lg:gap-7 lg:p-5">
         {/* Left: workout image */}
-        <div className="relative h-[260px] overflow-hidden rounded-xl sm:h-[340px] lg:h-[70vh] lg:max-h-[570px]">
+        <div className="relative h-65 overflow-hidden rounded-xl sm:h-85 lg:h-[70vh] lg:max-h-142.5">
           <Image
             src={workout.image}
             alt={workout.name}
@@ -119,7 +119,7 @@ export default function WorkoutDetails({ workout }: { workout: Workout }) {
             {specs.map(([label, value]) => (
               <div
                 key={label}
-                className="flex min-h-[32px] items-center justify-between gap-4 border-b border-white/5 px-3 py-1.5 last:border-b-0"
+                className="flex min-h-8 items-center justify-between gap-4 border-b border-white/5 px-3 py-1.5 last:border-b-0"
               >
                 <span className="text-[10px] font-bold tracking-wide text-gray-400">
                   {label}
@@ -152,11 +152,12 @@ export default function WorkoutDetails({ workout }: { workout: Workout }) {
             <button
               type="button"
               onClick={togglePlan}
+              disabled={!inPlan && planIds.length >= 5}
               className={`rounded-lg px-4 py-3 text-xs font-bold transition ${
                 inPlan
                   ? "border border-[#ccff00] text-[#ccff00]"
                   : "bg-[#ccff00] text-black hover:bg-[#b8e600]"
-              }`}
+              }disabled:cursor-not-allowed disabled:opacity-40"`}
             >
               {inPlan ? "✓ Added to today's plan" : "▣ Add to today's plan"}
             </button>
